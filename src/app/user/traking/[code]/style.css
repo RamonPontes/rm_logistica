@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.traking-container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.traking-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.top {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    font-size: 30px;
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    padding: 10px;
+    position: sticky; 
+    background-color: #262632;
+        top: 0;
+    z-index: 10;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    font-family: "Kanit", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 20px;
+    background-color: #1a1a23;
+    border-radius: 10px;
+    padding: 10px;
+}
