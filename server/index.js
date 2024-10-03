@@ -8,8 +8,16 @@ function sqlGetTraking(trakingCode) {
             origen: 'PontaGrossa',
             status: 'Tranferencia',
             destino: 'Curitiba'
+        },
+        '02': {
+            data: '25/09 14:20',
+            origen: 'Curitiba',
+            status: 'Em trânsito',
+            destino: 'São Paulo'
         }
     }    
+
+    return resp
 }
 
 const app = express()
@@ -22,8 +30,8 @@ app.get('/', function (req, res) {
 }); 
 
 app.get('/traking', function (req, res) {
-    if(req.body.trakingCode) {
-        res.send(sqlGetTraking(req.body.trakingCode))
+    if(req.query.trakingCode) {
+        res.send(sqlGetTraking(req.query.trakingCode))
     } else {
         res.send("Codigo de rastreio não recebido")
         res.status(404)

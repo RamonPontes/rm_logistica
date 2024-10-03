@@ -7,7 +7,7 @@ import api from "@/app/services/api"
 export default function Traking({ params }) {
     useEffect(() => {
         api
-            .get("/traking")
+            .get("/traking", { trakingCode: '01' })
             .then((response) => console.log(response.data))
             .catch((err) => {
             console.error(err)
