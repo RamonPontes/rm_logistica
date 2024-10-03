@@ -5,20 +5,23 @@ import './style.css'
 import api from "@/app/services/api"
 
 export default function Traking({ params }) {
-
+    const [historicos, setHistoricos] = useState([])
     const [error, setError] = useState({})
 
-    useEffect(() => {
-        api
-            .get(`/traking?trakingCode=${params.code}`, { trakingCode: '01' })
-            .then((response) => console.log(response.data))
-            .catch((err) => {
-                setError({
-                    status: 500,
-                    message: 'Erro interno entre em contato com o suporte!'
-                })
+    api
+        .get(`/traking?trakingCode=${params.code}`, { trakingCode: '01' })
+        .then((response) => {
+            setHistoricos(
+                response.data
+            )
+        })
+        .catch((err) => {
+            console.log(err.response.data)
+            setError({
+                status: err.status,
+                message: err.response.data
             })
-    }, [])
+        })
 
     return (
         <div className="traking-container">
@@ -32,6 +35,14 @@ export default function Traking({ params }) {
                         <p>Status</p>
                         <p>Ponto Destino</p>
                     </div>
+                    {historicos.map((historico, index) => (
+                        <div key={index} className="item">
+                            <p>{historico.data}</p>
+                            <p>{historico.origen}</p>
+                            <p>{historico.status}</p>
+                            <p>{historico.destino}</p>
+                        </div>
+                    ))}
                 </div>
             }
         </div>

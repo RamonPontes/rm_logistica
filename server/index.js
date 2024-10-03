@@ -2,20 +2,20 @@ import express from 'express'
 import cors from 'cors'
 
 function sqlGetTraking(trakingCode) {
-    const resp = {
-        '01': {
+    const resp = [
+        {
             data: '24/09 22:32',
             origen: 'PontaGrossa',
-            status: 'Tranferencia',
+            status: 'Transferencia',
             destino: 'Curitiba'
         },
-        '02': {
+        {
             data: '25/09 14:20',
             origen: 'Curitiba',
             status: 'Em trânsito',
             destino: 'São Paulo'
         }
-    }    
+    ];
 
     return resp
 }
@@ -31,10 +31,9 @@ app.get('/', function (req, res) {
 
 app.get('/traking', function (req, res) {
     if(req.query.trakingCode) {
-        res.send(sqlGetTraking(req.query.trakingCode))
+        res.status(200).send(sqlGetTraking(req.query.trakingCode))
     } else {
-        res.send("Codigo de rastreio não recebido")
-        res.status(404)
+        res.status(404).send("Código de rastreio não encontrado")
     }
 })
 
