@@ -25,7 +25,7 @@ app.get('/traking', function (req, res) {
     if(req.body.trakingCode) {
         res.send(sqlGetTraking(req.body.trakingCode))
     } else {
-        res.send("Codigo de rastreio invalido!")
+        res.send("Codigo de rastreio não recebido")
         res.status(404)
     }
 })
