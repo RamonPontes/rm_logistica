@@ -5,7 +5,7 @@ import './style.css'
 import api from "@/app/services/api"
 
 export default function Traking({ params }) {
-    const [historicos, setHistoricos] = useState([])
+    const [historicos, setHistoricos] = useState()
     const [error, setError] = useState({})
 
     api
@@ -16,10 +16,9 @@ export default function Traking({ params }) {
             )
         })
         .catch((err) => {
-            console.log(err.response.data)
             setError({
-                status: err.status,
-                message: err.response.data
+                status: err.status !== undefined ? err.status : "Error",
+                message: err.response && err.response.data ? err.response.data : "Entre em contato com o suporte"
             })
         })
 
@@ -27,7 +26,7 @@ export default function Traking({ params }) {
         <div className="traking-container">
             {Object.keys(error).length > 0 && <h1>{error.status + ' - ' + error.message}</h1>}
 
-            {Object.keys(error).length == 0 &&
+            {historicos &&
                 <div className='traking-itens'>
                     <div className="top">
                         <p>Data/Hora</p>

@@ -10,7 +10,7 @@ export default function Home() {
         </section>
         <section>
           <p>Admin options: </p>
-          <a href="">Editar encomenda</a>
+          <a href="/admin/search">Editar encomenda</a>
         </section>
       </div>
     </>

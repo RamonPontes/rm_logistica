@@ -8,6 +8,10 @@
     border: none;
 }
 
+a {
+    text-decoration: none;
+}
+
 body {
     background-color: #262632;
     display: flex;
@@ -17,7 +21,7 @@ body {
     height: calc(100vh - 40px);
 }
 
-body>h1 {
+body a>h1 {
     font-family: "Noto Sans JP", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
@@ -25,6 +29,8 @@ body>h1 {
     font-style: normal;
 }
 
-body>h1>.rm-logisticas {
+
+
+body a>h1>.rm-logisticas {
     color: #67ffd4;
 }

@@ -1,6 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 
+const PORT = 3001
+
 function sqlGetTraking(trakingCode) {
     const resp = [
         {
@@ -27,14 +29,17 @@ app.use(express.json())
 
 app.get('/', function (req, res) {
     res.send('Hello World')
-}); 
+});
 
 app.get('/traking', function (req, res) {
-    if(req.query.trakingCode) {
+    if (req.query.trakingCode) {
         res.status(200).send(sqlGetTraking(req.query.trakingCode))
     } else {
         res.status(404).send("Código de rastreio não encontrado")
     }
 })
 
-app.listen(3001);
+app.listen(PORT, (err) => {
+    if (err) console.log("Error in server setup");
+    console.log("Server listening on Port", PORT);
+});
