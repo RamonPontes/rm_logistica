@@ -1,9 +1,13 @@
 import express from 'express'
 import cors from 'cors'
+import 'dotenv/config'
 
-const PORT = 3001
+const PORT = process.env.API_PORT
 
 function sqlGetTraking(trakingCode) {
+
+    // FAZER CONNECT COM 
+
     const resp = [
         {
             data: '24/09 22:32',
@@ -41,5 +45,5 @@ app.get('/traking', function (req, res) {
 
 app.listen(PORT, (err) => {
     if (err) console.log("Error in server setup");
-    console.log("Server listening on Port", PORT);
+    console.log("Server listening on Port: ", PORT + "\n      BY.RamonPontes");
 });
