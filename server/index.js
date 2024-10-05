@@ -6,7 +6,7 @@ const PORT = process.env.API_PORT
 
 function sqlGetTraking(trakingCode) {
 
-    // FAZER CONNECT COM 
+    // FAZER CONNECT COM A DB
 
     const resp = [
         {

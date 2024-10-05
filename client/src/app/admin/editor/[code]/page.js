@@ -3,16 +3,19 @@
 import { useEffect, useState } from 'react'
 import './style.css'
 import api from "@/app/services/api"
-import { LucidePlus, LucideSquarePen } from 'lucide-react'
+import { FilePlus, LucideSquarePen } from 'lucide-react'
 
 export default function Traking({ params }) {
+
+    const code = params.code
+
     const [historicos, setHistoricos] = useState()
     const [error, setError] = useState({})
-    const [button_color, setButton_color] = useState('white')
+    const [editorHidden, setEditorHidden] = useState(false)
 
     useEffect(() => {
         api
-            .get(`/traking?trakingCode=${params.code}`, { trakingCode: '01' })
+            .get(`/traking?trakingCode=${code}`, { trakingCode: '01' })
             .then((response) => {
                 setHistoricos(response.data)
             })
@@ -22,7 +25,7 @@ export default function Traking({ params }) {
                     message: err.response && err.response.data ? err.response.data : "Entre em contato com o suporte"
                 })
             })
-    }, [params.code])
+    }, [code])
 
     return (
         <div className="traking-container">
@@ -32,7 +35,11 @@ export default function Traking({ params }) {
                 <div className="historico">
                     <div className='traking-itens'>
                         <div className="top">
-                            <LucidePlus size={20} color='rgb(0, 255, 0)' style={{backgroundColor: '#1a1a22', padding: '4px', borderRadius: '5px'}} />
+                            <FilePlus onClick={() => {
+                                setEditorHidden(true)
+                            }} 
+                                size={30} color='rgb(0, 255, 0)' style={{backgroundColor: '#1a1a22', padding: '5px', borderRadius: '5px'}} />
+                           
                             <p style={{ gridColumn: "2 / 3" }}>Data/Hora</p>
                             <p>Ponto de origem</p>
                             <p>Status</p>
@@ -40,7 +47,7 @@ export default function Traking({ params }) {
                         </div>
                         {historicos.map((historico, index) => (
                             <div key={index} className="item">
-                                <LucideSquarePen style={{padding: '4px'}} size={20} color={button_color} />
+                                <LucideSquarePen style={{padding: '4px'}} size={20} color='white'/>
                                 <p>{historico.data}</p>
                                 <p>{historico.origen}</p>
                                 <p>{historico.status}</p>
@@ -48,6 +55,16 @@ export default function Traking({ params }) {
                             </div>
                         ))}
                     </div>
+                </div>
+            }
+            
+            {editorHidden && 
+                <div className="editor_container">
+                    <input type="text" autoComplete="off" placeholder='Codigo' value={code} disabled />
+                    <input type="datetime-local" name="" id="" />
+                    <input type="text" placeholder="Origem" />
+                    <input type="text" placeholder="Status" />
+                    <input type="text" placeholder="Destino" />
                 </div>
             }
         </div>
