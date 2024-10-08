@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import './style.css'
 import api from "@/app/services/api"
 import { FilePlus, LucideSquarePen } from 'lucide-react'
+import Notify from '@/app/components/notify/Notify'
 
 export default function Traking({ params }) {
 
@@ -12,6 +13,14 @@ export default function Traking({ params }) {
     const [historicos, setHistoricos] = useState()
     const [error, setError] = useState({})
     const [editorHidden, setEditorHidden] = useState(false)
+
+    const [editorDate, setEditorDate] = useState({
+        origem: "",
+        destino: "",
+        status: "",
+        data: "",
+
+    })
 
     useEffect(() => {
         api
@@ -37,9 +46,9 @@ export default function Traking({ params }) {
                         <div className="top">
                             <FilePlus onClick={() => {
                                 setEditorHidden(true)
-                            }} 
-                                size={30} color='rgb(0, 255, 0)' style={{backgroundColor: '#1a1a22', padding: '5px', borderRadius: '5px'}} />
-                           
+                            }}
+                                size={30} color='rgb(0, 255, 0)' style={{ backgroundColor: '#1a1a22', padding: '5px', borderRadius: '5px' }} />
+
                             <p style={{ gridColumn: "2 / 3" }}>Data/Hora</p>
                             <p>Ponto de origem</p>
                             <p>Status</p>
@@ -47,7 +56,7 @@ export default function Traking({ params }) {
                         </div>
                         {historicos.map((historico, index) => (
                             <div key={index} className="item">
-                                <LucideSquarePen style={{padding: '4px'}} size={20} color='white'/>
+                                <LucideSquarePen style={{ padding: '4px' }} size={20} color='white' />
                                 <p>{historico.data}</p>
                                 <p>{historico.origen}</p>
                                 <p>{historico.status}</p>
@@ -57,14 +66,59 @@ export default function Traking({ params }) {
                     </div>
                 </div>
             }
-            
-            {editorHidden && 
+
+            {editorHidden &&
                 <div className="editor_container">
                     <input type="text" autoComplete="off" placeholder='Codigo' value={code} disabled />
-                    <input type="datetime-local" name="" id="" />
-                    <input type="text" placeholder="Origem" />
-                    <input type="text" placeholder="Status" />
-                    <input type="text" placeholder="Destino" />
+                    <input
+                        type="datetime-local"
+                        value={editorDate.data}
+                        onChange={(e) => setEditorDate(prevData => ({
+                            ...prevData,
+                            data: e.target.value
+                        }))}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Origem"
+                        value={editorDate.origem}
+                        onChange={(e) => setEditorDate(prevData => ({
+                            ...prevData,
+                            origem: e.target.value
+                        }))}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Status"
+                        value={editorDate.status}
+                        onChange={(e) => setEditorDate(prevData => ({
+                            ...prevData,
+                            status: e.target.value
+                        }))}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Destino"
+                        value={editorDate.destino}
+                        onChange={(e) => setEditorDate(prevData => ({
+                            ...prevData,
+                            destino: e.target.value
+                        }))}
+                    />
+                    <button onClick={() => {
+                        const regex = /^([0-2][0-9]|(3)[0-1])\/([0][1-9]|(1)[0-2])\/\d{4} ([0-1][0-9]|(2)[0-3]):([0-5][0-9])$/;
+
+                        <Notify
+                            menssagem="Ramon Teste"
+
+                        />
+
+                        console.log("A")
+
+                        if (editorDate.status !== "" && editorDate.destino !== "" && editorDate.origem !== "" && regex.test(editorDate.data)) {
+                            setEditorHidden(false)
+                        }
+                    }}>CONFIRMAR</button>
                 </div>
             }
         </div>

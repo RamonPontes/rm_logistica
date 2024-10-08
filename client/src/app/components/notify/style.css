@@ -1,0 +1,37 @@
+.notify {
+    background-color: red;
+    padding: 20px 25px;
+    position: absolute;
+    display: flex;
+    z-index: 12;
+    top: 0;
+    right: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 20px 40px;
+
+    animation-name: entradaSaida; 
+    animation-duration: 3s; 
+    animation-timing-function: ease-in-out; 
+    animation-fill-mode: forwards; 
+
+}
+
+@keyframes entradaSaida {
+    0% {
+        transform: translateX(100%); 
+        opacity: 0;
+    }
+    25% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    75% {
+        transform: translateX(0); 
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+}

@@ -16,6 +16,7 @@ body {
     background-color: #262632;
     display: flex;
     align-items: center;
+    overflow: hidden;
     padding: 20px;
     flex-direction: column;
     height: calc(100vh - 40px);
@@ -28,8 +29,6 @@ body a>h1 {
     font-size: 40px;
     font-style: normal;
 }
-
-
 
 body a>h1>.rm-logisticas {
     color: #67ffd4;
